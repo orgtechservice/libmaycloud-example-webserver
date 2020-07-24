@@ -53,22 +53,22 @@ int main(int argc, char *argv[]) {
 	NetDaemon daemon(100, 1024);
 
 	// Наш веб-сервер
-	AsyncWebServer *server = new AsyncWebServer(&daemon);
+	AsyncWebServer server(&daemon);
 
 	// Назначаем 9095 порт TCP
-	server->bind(9095);
+	server.bind(9095);
 
 	// Начинаем слушать заданный порт с размером очереди входящих соединений = 10
-	server->listen(10);
+	server.listen(10);
 
 	// Добавляем сервер в демона
-	daemon.addObject(server);
+	daemon.addObject(&server);
 
 	// Сопоставляем URL-адресам их обработчики (хэндлеры)
-	server->get("/", mainPage, (void *) server);
-	server->get("/auth", protectedPage, (void *) server);
-	server->get("/stat.json", statPage, (void *) server);
-	server->get("/index.php", getMethodPage, (void *) server);
+	server.get("/", mainPage, (void *) &server);
+	server.get("/auth", protectedPage, (void *) &server);
+	server.get("/stat.json", statPage, (void *) &server);
+	server.get("/index.php", getMethodPage, (void *) &server);
 
 	// Просто выведем подсказку
 	std::cout << "Listening on http://127.0.0.1:9095/" << std::endl;
