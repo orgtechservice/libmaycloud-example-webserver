@@ -1,2 +1,5 @@
 # libmaycloud-example-webserver
-An example of how to use libmaycloud’s embedabble web server component
+
+Пример использования встраиваемого веб-сервера libmaycloud.
+
+![Screenshot](https://averkov.net/static/images/lmc-webserver.png)
