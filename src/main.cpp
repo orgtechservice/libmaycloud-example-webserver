@@ -54,7 +54,7 @@ void postMethodPage(HttpRequest *request, HttpResponse *response, void *userdata
 		if(foo.empty()) foo = "&lt;an empty string&gt;";
 		response->setSimpleHtmlPage("POST var example", "The value of <b>foo</b> is: " + foo + "<br/><a href=\"/\">Go back</a>");
 	} else {
-		const char *data = "<form method=\"post\" action=\"/check.jsp\">"
+		const char *data = "<form method=\"post\" action=\"/check.jsp\" enctype=\"multipart/form-data\">"
 			"<input type=\"text\" name=\"foo\" />&nbsp;"
 			"<input type=\"submit\" value=\"Send\">"
 			"</form>";
