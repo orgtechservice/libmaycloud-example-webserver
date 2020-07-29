@@ -63,6 +63,12 @@ void postMethodPage(HttpRequest *request, HttpResponse *response, void *userdata
 	}
 }
 
+void hlsPage(HttpRequest *request, HttpResponse *response, void *userdata) {
+	std::string filename("/tmp/hls/");
+	filename += request->getRouteParam(0);
+	response->sendFile(filename);
+}
+
 /**
 * Точка входа
 */
@@ -89,6 +95,9 @@ int main(int argc, char *argv[]) {
 	server.get("/stat.json", statPage, (void *) &server);
 	server.get("/index.php", getMethodPage, (void *) &server);
 	server.route("/check.jsp", postMethodPage, (void *) &server);
+	
+	// Обработчик HLS-ресурса
+	server.get("/hls/{filename}", hlsPage, (void *) &server);
 
 	// Просто выведем подсказку
 	std::cout << "Listening on http://127.0.0.1:9095/" << std::endl;
